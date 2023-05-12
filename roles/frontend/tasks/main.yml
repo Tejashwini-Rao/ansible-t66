@@ -1,0 +1,37 @@
+- name: Set Hostname
+  ansible.builtin.shell: set-hostname frontend
+
+- name: Install nginx
+  ansible.builtin.yum:
+    name: nginx
+
+- name: Remove old content
+  ansible.builtin.file:
+    path: /usr/share/nginx/html
+
+- name: Unarchive a file
+  ansible.builtin.unarchive:
+    src:  https://github.com/roboshop-devops-project/frontend/archive/main.zip
+    dest:  /tmp
+    remote_src: yes
+
+- name: Copy file with owner and permissions
+  ansible.builtin.copy:
+    src: frontend-main/static/
+    dest: cd /usr/share/nginx/html
+    remote_src: yes
+
+- name: Restart service
+  ansible.builtin.service:
+    name: nginx
+    state: restarted
+
+- name: Load Schema
+  community.mongodb.mongodb_shell:
+    file: "/tmp/mongodb_main/{{item}}.js"
+    idempotent: yes
+  loop:
+    - catalogue
+    - users
+
+
