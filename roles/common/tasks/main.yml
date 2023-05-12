@@ -4,7 +4,6 @@
 - name: Setup Hostname
   ansible.builtin.shell: set-hostname {{COMPONENT}}
 
-
 - name: Install Ansible SSM Python3 Deps
   ansible.builtin.pip:
     name: "{{item}}"
