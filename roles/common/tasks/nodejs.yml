@@ -12,10 +12,11 @@
     tasks_from: app-pre-setup
 
 
-#- name: Install NodeJS dependencies
- # community.general.npm:
- # path: /home/roboshop/{{COMPONENT}}
- # become_user: roboshop
+
+- name: Install NodeJS dependencies
+  community.general.npm:
+  path: /home/roboshop/{{COMPONENT}}
+  become_user: roboshop
 
 
 - name: Include SystemD
