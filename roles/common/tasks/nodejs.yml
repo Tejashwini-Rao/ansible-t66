@@ -5,6 +5,11 @@
   ansible.builtin.yum:
     name: nodejs
     state: installed
+    register: output
+
+
+- name: show the value of output
+  debug: var=output
 
 - name: Include App Pre Setup
   ansible.builtin.include_role:
