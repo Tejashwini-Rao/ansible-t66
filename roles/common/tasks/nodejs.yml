@@ -6,11 +6,16 @@
     name: nodejs
     state: installed
 
-
 - name: Include App Pre Setup
   ansible.builtin.include_role:
     name: common
     tasks_from: app-pre-setup
+
+
+- name: Install NodeJS dependencies
+  community.general.npm:
+    path: /home/roboshop/{{COMPONENT}}
+  become_user: roboshop
 
 
 
