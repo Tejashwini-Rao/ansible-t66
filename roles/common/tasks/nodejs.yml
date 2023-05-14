@@ -4,7 +4,7 @@
 - name: Install NodeJS
   ansible.builtin.yum:
     name: nodejs
-    state: installed
+
 
 - name: Include App Pre Setup
   ansible.builtin.include_role:
@@ -16,8 +16,6 @@
   community.general.npm:
     path: /home/roboshop/{{COMPONENT}}
   become_user: roboshop
-
-
 
 
 - name: Include SystemD
